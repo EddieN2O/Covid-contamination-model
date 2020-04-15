@@ -6,7 +6,7 @@ class Individuo {
 		this.inf = inf;
 		this.im = im;		
 		this.r = raio;
-		this.diametro = 4;
+		this.diametro = 2;
 		this.speed = p5.Vector.random2D(-3, 3);
 		this.i = 0
 	}

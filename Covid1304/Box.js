@@ -48,37 +48,72 @@ class Box {
 		pop();
 	}
 
-	updateG() {
-		let infectado = 0, morte = 0, recuperado = 0, 
-			normal = 0, Ra = 0;
-		push();
-		translate(this.x + box * (1.1 * m + 0.1), this.y);
+	updateG(sep) {
+		if (sep) {
+			let infectado = 0, morte = 0, recuperado = 0, 
+				normal = 0, Ra = 0;
 
-		if ((frameCount * det / dia) % 1 == 0) {
-			for (this.each of this.humans) {
-				if (this.each.inf) {
-					Ra += this.each.rep;
-					infectado++;
+			push();
+			translate(this.x + box * (1.1 * m + 0.1), this.y);
+
+			if ((frameCount * det / dia) % 1 == 0) {
+				for (this.each of this.humans) {
+					if (this.each.inf) {
+						Ra += this.each.rep;
+						infectado++;
+					}
+					if (this.each.im)
+						recuperado++;
+					if (!this.each.life)
+						morte++;
+					if (!this.each.inf && !this.each.im && this.each.life)
+						normal++;
 				}
-				if (this.each.im)
-					recuperado++;
-				if (!this.each.life)
-					morte++;
-				if (!this.each.inf && !this.each.im && this.each.life)
-					normal++;
+
+				R0 = 1 + Ra / infectado;
+				M = morte;
+				N = normal;
+				I = infectado;
+				R = recuperado;	
+
+				let f = new Graph(N, M, I, R, this.t);
+				this.fx.push(f);
+				this.t++;
 			}
+			push();
+			scale(box);
+			for (this.graf of this.fx)
+				this.graf.update();
+			pop();
 
-			R0 = 1 + Ra / infectado;
-			M = morte;
-			N = normal;
-			I = infectado;
-			R = recuperado;	
-
-			let f = new Graph(N, M, I, R, this.t);
-			this.fx.push(f);
-			this.t++;
+			stroke(255);
+			strokeWeight(1);
+			line(0, 1.05 * box, 0, 0);
+			line(- 0.05 * box, box, box, box);
+	/*
+			noStroke();
+			fill(255);
+			text("Pessoas não expostas: " + N, 0, 0);
+			text("Pessoas infectadas: " + I, 0, 20);
+			text("Pessoas recuperadas: " + R, 0, 40);
+			text("Mortes: " + M, 200, 40);
+			text("Tempo passado " + floor(frameCount / dia), 200, 0);
+			text("R0 " + round(R0, 3), 200, 20);
+	*/		
+			if ( frameCount / dia % 1 == 0) {
+	/*
+				print("infectados no dia " + I);
+				print("infectados nesse dia " + (I - Iprev));
+	*/
+				if (Iprev == I) {
+					if (this.finish == m * m * 10)
+						noLoop();
+					this.finish++;
+				}
+				Iprev = I;
+			}		
+			pop();
 		}
-		pop();
 	}
 
 	show() {
@@ -91,42 +126,6 @@ class Box {
 		for(this.ind of this.humans)
 			this.ind.display();
 		pop();
-	}
-
-	showG() {
-		push();
-		translate(this.x + box * (1.1 * m + 0.1), this.y);
-		for (this.graf of this.fx) {
-			this.graf.update();
-		}
-		stroke(255);
-		strokeWeight(1);
-		line(0, 1.05 * box, 0, 0);
-		line(- 0.05 * box, box, box, box);
-/*
-		noStroke();
-		fill(255);
-		text("Pessoas não expostas: " + N, 0, 0);
-		text("Pessoas infectadas: " + I, 0, 20);
-		text("Pessoas recuperadas: " + R, 0, 40);
-		text("Mortes: " + M, 200, 40);
-		text("Tempo passado " + floor(frameCount / dia), 200, 0);
-		text("R0 " + round(R0, 3), 200, 20);
-*/		
-		if ( frameCount / dia % 1 == 0) {
-/*
-			print("infectados no dia " + I);
-			print("infectados nesse dia " + (I - Iprev));
-*/
-			if (Iprev == I) {
-				if (this.finish == m * m * 10)
-					noLoop();
-				this.finish++;
-			}
-			Iprev = I;
-		}
-		pop();
-
 	}
 }
 
