@@ -7,4 +7,6 @@ Exponential model, with alpha and betas estimation, by means of linearization, c
 # Growth charts and percentages
 Analysis of the percentage growth of the number of contaminated and dead, for the World, for Brazil, especially also for São Paulo and the Northeast region
 
+# Graphics
 
+![testando01](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numbercasesBRSPNE.png)
