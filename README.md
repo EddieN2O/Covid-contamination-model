@@ -9,4 +9,11 @@ Analysis of the percentage growth of the number of contaminated and dead, for th
 
 # Graphics
 
-![testando01](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numbercasesBRSPNE.png)
+## Cases
+![1](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numbercasesBRSPNE.png)
+![1](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numbercasesBRSPNEcum.png)
+
+## Deaths
+![1](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numberdeathsBRSPNE.png)
+![1](https://raw.githubusercontent.com/Yannngn/Covid-contamination-model/master/Graphics/numberdeathsBRSPNEcum.png)
+
